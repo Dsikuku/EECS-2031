@@ -1,0 +1,86 @@
+#!/bin/sh
+# EECS2031 - asg2_unix
+# Filename: myutil
+# Author: Geller, David
+# Email: dgeller@my.yorku.ca
+# Login ID: dgeller
+
+echo "===============MENU==============="
+echo "s: Search for a word"
+echo "c: Count lines, words, characters"
+echo "f: List all ordinary files in current directory"
+echo "v: view content of a file"
+echo "d: Double spacing"
+echo "a: Add line numbers"
+echo "l: Display specified lines in file"
+echo "h: Help / Display this menu"
+echo "r: Clear the screen"
+echo "q: Quit the program"
+echo "=================================="
+
+echo -n "Enter command: "
+read command 
+
+while test $command != q && test $command != Q
+do
+
+if test $command = s || test $command = S
+then
+isearch
+
+elif test $command = c || test $command = C
+then
+icount
+
+elif test $command = f || test $command = F
+then
+allfiles
+
+elif test $command = v || test $command = V
+then
+fdisplay
+
+elif test $command = d || test $command = D
+then
+doublesp
+
+elif test $command = a || test $command = A
+then
+addlines
+
+elif test $command = l || test $command = L
+then
+prtlines
+
+elif test $command = h || test $command = H
+then
+echo "===============MENU==============="
+echo "s: Search for a word"
+echo "c: Count lines, words, characters"
+echo "f: List all ordinary files in current directory"
+echo "v: view content of a file"
+echo "d: Double spacing"
+echo "a: Add line numbers"
+echo "l: Display specified lines in file"
+echo "h: Help / Display this menu"
+echo "r: Clear the screen"
+echo "q: Quit the program"
+echo "=================================="
+
+elif test $command = r || test $command = R
+then
+clear
+
+else
+echo "Invalid Command!"
+fi
+
+echo
+echo -n "Enter command: "
+read command
+done
+
+if test $command = q || test $command = Q
+then
+exit 1
+fi

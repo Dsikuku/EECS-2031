@@ -1,0 +1,14 @@
+#!/bin/sh
+# EECS 2031 - asg2_unix
+# Filename: allfiles
+# Author: Geller, David
+# Email: dgeller@my.yorku.ca
+# Login ID: dgeller
+
+for i in *
+do
+if test -f $i
+then
+ls $i
+fi
+done

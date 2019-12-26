@@ -1,0 +1,49 @@
+#!/bin/sh
+# EECS2031 - asg2_unix
+# Filename: fdisplay
+# Author: Geller, David
+# Email: dgeller@my.yorku.ca
+# Login ID: dgeller
+
+echo -n "Enter the file name: "
+read fname
+
+if test ! -f $fname
+then 
+echo "File '$fname' does not exist."
+exit 1
+
+elif test ! -r $fname
+then 
+echo "File '$fname' is not readable."
+exit 1
+fi
+
+echo -n "Enter option (e, p, f, l): "
+read option
+
+while test $option != e && test $option != E && test $option != p && test $option != P && test $option != f && test $option != F && test $option != l && test $option != L
+do
+echo "Invalid option"
+echo -n "Enter option (e, p, f, l): "
+read option
+done
+
+if test $option = e || test $option = E
+then 
+cat $fname
+
+elif test $option = p || test $option = P
+then
+cat $fname | more
+
+elif test $option = f || test $option = F
+then
+head -10 $fname
+
+elif test $option = l || test $option = L
+then
+tail -10 $fname
+
+fi
+

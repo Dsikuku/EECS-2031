@@ -1,0 +1,72 @@
+#!/bin/sh
+# EECS 2031 - asg2_unix
+# Filename: addlines
+# Author: Geller, David
+# Email: dgeller@my.yorku.ca
+# Login ID: dgeller
+
+echo -n "Enter input file name: "
+read ifile
+
+if test ! -f $ifile
+then
+echo "File '$ifile' does not exist."
+exit 1
+
+elif test ! -r $ifile
+then
+echo "File '$ifile' is not readable."
+exit 1
+fi
+
+echo -n "Enter output file name: "
+read ofile
+
+if test -f $ofile
+then
+
+if test ! -w $ofile
+then
+echo "File '$ofile' is not writable."
+exit 1
+else
+echo "File '$ofile' exists."
+fi
+
+else
+count=1
+cat $ifile | while read name name2
+do
+echo "$count: $name $name2"
+count=`expr $count + 1`
+done > $ofile
+exit 1 
+fi
+
+echo -n "Append to it (y/n)? "
+read append
+
+while test $append != y && test $append != Y && test $append != n && test $append != N
+do
+echo "Invalid option"
+echo -n "Append to it (y/n)? "
+read append 
+done
+
+if test $append = y || test $append = Y
+then
+count=1
+cat $ifile | while read name name2
+do
+echo "$count: $name $name2"
+count=`expr $count + 1`
+done >> $ofile
+
+elif test $append = n || test $append = N
+then
+exit 1
+
+else
+echo "Invalid!"
+
+fi 

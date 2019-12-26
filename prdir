@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if test $# = 0
+then
+	for i in *
+	do
+		ls -l $i 
+	done
+else
+	for i in $*
+	do
+		ls -l $i
+	done
+fi
+

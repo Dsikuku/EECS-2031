@@ -1,0 +1,58 @@
+#!/bin/sh
+# EECS2031 - asg2_unix
+# Filename: icount
+# Author: Geller, David
+# Email: dgeller@my.yorku.ca
+# Login ID: dgeller 
+
+echo -n "Enter the file name: "
+read fname
+
+if test ! -f $fname
+then
+echo "File '$fname' does not exist"
+exit 1
+
+elif test ! -r $fname
+then
+echo "File '$fname' is not readable."
+exit 1
+fi
+
+echo -n "Count lines, words, characters or all three (l, m, c, a)? "
+read option
+
+while test $option != l && test $option != L && test $option != m && test $option != M && test $option != c && test $option != C && test $option != a && test $option != A
+do
+echo "Invalid option"
+echo -n "Count lines, words, characters or all three (l, m, c, a)? "
+read option
+done
+
+if test $option = l || test $option = L
+then
+	line=`wc -l < $fname`
+	echo "File '$fname' contains $line lines."
+
+elif test $option = m || test $option = M
+then
+	word=`wc -w < $fname`
+	echo "File '$fname' contains $word words."
+
+elif test $option = c || test $option = C
+then
+	char=`wc -c < $fname`
+	echo "File '$fname' contains $char characters."
+
+elif test $option = a || test $option = A
+then
+	line=`wc -l < $fname`
+	word=`wc -w < $fname`
+	char=`wc -c < $fname`
+	echo "File '$fname' contains $line lines, $word words, $char characters."
+
+else
+	echo "Invalid!"
+
+fi
+
